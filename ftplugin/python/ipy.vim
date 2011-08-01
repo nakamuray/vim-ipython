@@ -302,8 +302,11 @@ vim.command("let l:doc = %s"% reply)
 endpython
 return l:doc
 endfunction
-set bexpr=IPythonBalloonExpr()
-set ballooneval
+
+if has("gui_running")
+  set bexpr=IPythonBalloonExpr()
+  set ballooneval
+endif
 
 fun! CompleteIPython(findstart, base)
 	  if a:findstart
