@@ -296,7 +296,7 @@ command! -nargs=0 IPythonXSelection :py km_from_string(vim.eval('@*'))
 function! IPythonBalloonExpr()
 python << endpython
 word = vim.eval('v:beval_text')
-reply = get_doc(word)
+reply = [str(u) for u in get_doc(word)]
 #reply = reply[:40]
 vim.command("let l:doc = %s"% reply)
 endpython
@@ -325,7 +325,7 @@ msg_id = km.shell_channel.complete(base, vim.current.line, vim.eval("col('.')"))
 time.sleep(.1)
 m = get_child_msgs(msg_id)[0]
 
-matches = m['content']['matches']
+matches = [str(u) for u in m['content']['matches']]
 #end = len(base)
 #completions = [m[end:]+findstart+base for m in matches]
 matches.insert(0,base) # the "no completion" version
